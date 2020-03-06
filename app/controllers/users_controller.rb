@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :require_user_logged_in, only: [:index, :show]
+#上記でindexとshowを実行する前にrequire_user_logged_inが実行されるようになる  
+  
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
   end
