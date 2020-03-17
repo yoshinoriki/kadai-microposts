@@ -1,0 +1,27 @@
+<% if microposts.any? %>
+    <ul class="list-unstyled">
+        <% microposts.each do |micropost| %>
+            <li class="media">
+                <img class="mr-2 rounded" src="<%= gravatar_url(@user, { size: 50 }) %>">
+                <div class="media-body">
+                    <div>
+                        <%= micropost.micropost.user.name %>
+                    </div>
+                    <div>
+                        <%= micropost.micropost.content %>
+                        
+                        <% if current_user == micropost.micropost.user %>
+                            <%= link_to "Delete", micropost, method: :delete, data:{ confirm: "You sure?"}, class: 'btn btn-danger btn-sm' %>
+                        <% end %>
+                        <%= render 'favorites/favorites_button', micropost: micropost.micropost %>
+                    </div>
+                    
+                           
+                </div>
+            </li>
+        <% end %>
+    </ul>
+    
+    <%= paginate microposts %>
+    
+<% end %>
