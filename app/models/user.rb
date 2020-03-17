@@ -37,9 +37,7 @@ class User < ApplicationRecord
   end
   
   def favo_do(other_micropost)
-    unless self.microposts.include?(other_micropost)
       self.favorites.find_or_create_by(micropost_id: other_micropost.id)
-    end
   end
   
   def favo_del(other_micropost)
